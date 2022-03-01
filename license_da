@@ -1,0 +1,10 @@
+#!/bin/bash
+# update license directadmin
+ifdown lo:100;
+/usr/bin/perl -pi -e 's/^IPADDR=.*/IPADDR=176.99.3.34/' /etc/sysconfig/network-scripts/ifcfg-lo;
+ifup lo:100;
+cd /usr/local/directadmin/conf;
+wget -O license.key https://raw.githubusercontent.com/NOTAD/DirectAdmin-1.61.3-key-2038/main/license.key;
+chown diradmin:diradmin license.key;
+chmod 600 license.key;
+service directadmin restart;
